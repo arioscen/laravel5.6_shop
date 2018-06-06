@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/items', 'ItemController');
+
+Route::resource('/cart', 'CartController');
