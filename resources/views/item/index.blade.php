@@ -18,7 +18,7 @@
                                 <input hidden name="item_id" value="{{ $item->id }}">
                                 <input name="number" type="number" class="form-control-sm" value="1" min="1" max="100">
                             </div>
-                            <button type="submit" class="btn btn-secondary btn-sm">Add to Cart</button>
+                            <button type="submit" class="btn btn-info btn-sm">Add to Cart</button>
                         </form> 
                     </div>               
                 </div>

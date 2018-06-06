@@ -1,5 +1,5 @@
 @extends('layouts.base')
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"> </script>
 @section('content')
 <div class="row">
     <div class="col-12">
@@ -24,11 +24,12 @@
                                 <th scope="row">{{ $item->id }}</th>
                                 <td>{{ $item->name }}</td>
                                 <td>${{ $item->price }}</td>
-                                <td><input name="number" type="number" class="form-control-sm" value="{{ $item->pivot->number }}" min="1"</td>
+                                <td><input id="{{ $item->id }}" type="number" class="form-control-sm" value="{{ $item->pivot->number }}" min="1"</td>
                                 <td>${{ $item->price*$item->pivot->number }}</td>
                                 <form class="form-inline" action="{{ url('cart/delete/'.$item->id) }}" method="POST">
                                     {!! csrf_field() !!}
                                     <td><button type="submit" class="btn btn-secondary">Cancel</button></td>
+                                </form>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -46,4 +47,22 @@
         </div>
     </div>
 </div>
+<script>
+    $("input[type='number']").change(function() {
+        $.ajax({
+            url: 'cart/update/'+this.id,
+            type: 'POST',
+            data: {
+                _token: "{{ csrf_token() }}",
+                "number": this.value,
+            },
+            error: function() {
+                alert('error');
+            },
+            success: function(response) {
+                location.reload(true);
+            }
+        });
+    });    
+</script>
 @endsection

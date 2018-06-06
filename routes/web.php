@@ -24,3 +24,4 @@ Route::resource('/items', 'ItemController');
 Route::get('/cart', 'CartController@index');
 Route::post('/cart/add', 'CartController@add');
 Route::post('/cart/delete/{id}', 'CartController@delete');
+Route::post('/cart/update/{id}', 'CartController@update');

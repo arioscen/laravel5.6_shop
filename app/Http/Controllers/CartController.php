@@ -50,5 +50,15 @@ class CartController extends Controller
         $user->items()->detach($item_id);
 
         return redirect('cart');
-    }      
+    }
+    public function update(Request $request, $item_id)
+    {
+        $user_id = Auth::id();
+
+        $user = User::find($user_id);
+        $number = $request->get('number');
+        $user->items()->syncWithoutDetaching([$item_id => ['number' => $number]]);
+
+        return redirect('cart');
+    }          
 }
