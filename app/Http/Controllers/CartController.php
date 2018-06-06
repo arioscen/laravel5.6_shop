@@ -40,6 +40,9 @@ class CartController extends Controller
             $user->items()->syncWithoutDetaching([$item_id => ['number' => $number]]);
         }
         
+        $item_number = $user->items()->count();
+        $request->session()->put('item_number', $item_number);
+
         return redirect('items');
     }
     public function delete(Request $request, $item_id)
@@ -48,6 +51,9 @@ class CartController extends Controller
 
         $user = User::find($user_id);
         $user->items()->detach($item_id);
+
+        $item_number = $user->items()->count();
+        $request->session()->put('item_number', $item_number);
 
         return redirect('cart');
     }

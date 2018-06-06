@@ -30,13 +30,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ url('home') }}">Home <span class="sr-only">(current)</span></a>
-                </li>              
+                    <a class="nav-link" href="{{ url('home') }}">Home</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url('items') }}">Item</a>
+                </li>                
             </ul>  
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ url('cart') }}">Cart</a>
-                </li>            
+                </li>
+                @if (session('item_number'))
+                    <li class="nav-item active">
+                        <span class="text-danger bg-light rounded-circle">{{ session('item_number') }}</span>
+                    </li>
+                @endif          
                 @guest
                     <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                     <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
