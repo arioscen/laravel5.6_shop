@@ -20,7 +20,7 @@ class CartController extends Controller
         }
         return view('cart/index')->withItems($items)->withTotal($total);
     }
-    public function store(Request $request)
+    public function add(Request $request)
     {
         $this->validate($request, [
             'item_id' => 'required',
@@ -41,5 +41,14 @@ class CartController extends Controller
         }
         
         return redirect('items');
-    }       
+    }
+    public function delete(Request $request, $item_id)
+    {
+        $user_id = Auth::id();
+
+        $user = User::find($user_id);
+        $user->items()->detach($item_id);
+
+        return redirect('cart');
+    }      
 }

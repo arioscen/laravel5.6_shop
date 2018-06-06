@@ -21,4 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/items', 'ItemController');
 
-Route::resource('/cart', 'CartController');
+Route::get('/cart', 'CartController@index');
+Route::post('/cart/add', 'CartController@add');
+Route::post('/cart/delete/{id}', 'CartController@delete');

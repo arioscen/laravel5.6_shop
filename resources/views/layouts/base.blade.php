@@ -35,7 +35,7 @@
             </ul>  
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ url('cart') }}">Shopping cart</a>
+                    <a class="nav-link" href="{{ url('cart') }}">Cart</a>
                 </li>            
                 @guest
                     <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>

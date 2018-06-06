@@ -10,7 +10,7 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Item ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Price</th>
                             <th scope="col">Number</th>
@@ -24,9 +24,11 @@
                                 <th scope="row">{{ $item->id }}</th>
                                 <td>{{ $item->name }}</td>
                                 <td>${{ $item->price }}</td>
-                                <td>{{ $item->pivot->number }}</td>
+                                <td><input name="number" type="number" class="form-control-sm" value="{{ $item->pivot->number }}" min="1"</td>
                                 <td>${{ $item->price*$item->pivot->number }}</td>
-                                <td><a class="btn btn-primary" href="#" role="button">Link</a></td>
+                                <form class="form-inline" action="{{ url('cart/delete/'.$item->id) }}" method="POST">
+                                    {!! csrf_field() !!}
+                                    <td><button type="submit" class="btn btn-secondary">Cancel</button></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -36,7 +38,9 @@
                     <div class="col-2">
                         <h1>Total ${{ $total }}</h1>
                     </div> 
-                    <div class="col-1"></div>      
+                    <div class="col-2">
+                        <a class="btn btn-warning" href="#" role="button">Proceed to checkout</a>
+                    </div>      
                 </div>
             </div>
         </div>

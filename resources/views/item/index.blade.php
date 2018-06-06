@@ -12,7 +12,7 @@
                         <span>{{ $item->price }}</span>
                     </div>
                     <div class="row">
-                        <form class="form-inline" action="{{ url('cart') }}" method="POST">
+                        <form class="form-inline" action="{{ url('cart/add') }}" method="POST">
                             {!! csrf_field() !!}
                             <div class="form-group mr-2">
                                 <input hidden name="item_id" value="{{ $item->id }}">
