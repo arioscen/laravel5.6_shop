@@ -12,6 +12,6 @@ class ItemSeeder extends Seeder
     public function run()
     {
         DB::table('items')->delete();
-        $items = factory(App\Item::class, 3)->create();
+        $items = factory(App\Item::class, 20)->create();
     }
 }
