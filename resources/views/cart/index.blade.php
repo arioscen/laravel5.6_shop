@@ -19,19 +19,36 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($items as $item)
-                                <tr>
-                                <th scope="row">{{ $item->id }}</th>
-                                <td>{{ $item->name }}</td>
-                                <td>${{ $item->price }}</td>
-                                <td><input id="{{ $item->id }}" type="number" class="form-control-sm" value="{{ $item->pivot->number }}" min="1"</td>
-                                <td>${{ $item->price*$item->pivot->number }}</td>
-                                <form class="form-inline" action="{{ url('cart/delete/'.$item->id) }}" method="POST">
-                                    {!! csrf_field() !!}
-                                    <td><button type="submit" class="btn btn-secondary">Cancel</button></td>
-                                </form>
-                                </tr>
-                            @endforeach
+                            @auth
+                                @foreach($items as $item)
+                                    <tr>
+                                    <th scope="row">{{ $item->id }}</th>
+                                    <td>{{ $item->name }}</td>
+                                    <td>${{ $item->price }}</td>
+                                    <td><input id="{{ $item->id }}" type="number" class="form-control-sm" value="{{ $item->pivot->number }}" min="1"</td>
+                                    <td>${{ $item->price*$item->pivot->number }}</td>
+                                    <form class="form-inline" action="{{ url('cart/delete/'.$item->id) }}" method="POST">
+                                        {!! csrf_field() !!}
+                                        <td><button type="submit" class="btn btn-secondary">Cancel</button></td>
+                                    </form>
+                                    </tr>
+                                @endforeach
+                            @endauth
+                            @guest
+                                @foreach($items as $item)
+                                    <tr>
+                                    <th scope="row">{{ $item['id'] }}</th>
+                                    <td>{{ $item['name'] }}</td>
+                                    <td>${{ $item['price'] }}</td>
+                                    <td><input id="{{ $item['id'] }}" type="number" class="form-control-sm" value="{{ $item['number'] }}" min="1"</td>
+                                    <td>${{ $item['price']*$item['number'] }}</td>
+                                    <form class="form-inline" action="{{ url('cart/delete/'.$item['id']) }}" method="POST">
+                                        {!! csrf_field() !!}
+                                        <td><button type="submit" class="btn btn-secondary">Cancel</button></td>
+                                    </form>
+                                    </tr>
+                                @endforeach                            
+                            @endguest
                         </tbody>
                     </table>
                 </div>
