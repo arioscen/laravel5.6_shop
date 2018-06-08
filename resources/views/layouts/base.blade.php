@@ -40,10 +40,11 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ url('cart') }}">Cart</a>
                 </li>
-                @if (session('item_number'))
-                    <li class="nav-item active">
-                        <span class="text-danger bg-light rounded-circle">{{ session('item_number') }}</span>
-                    </li>
+                @if (Auth::user()->items()->count())
+                    <svg height="20" width="20">
+                        <circle cx="10" cy="10" r="8" fill="white" />
+                        <text x="50%" y="50%" dy=".3em" text-anchor="middle" fill="red">{{ Auth::user()->items()->count() }}</text>
+                    </svg>                    
                 @endif          
                 @guest
                     <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
