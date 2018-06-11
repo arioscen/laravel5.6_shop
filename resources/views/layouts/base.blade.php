@@ -49,6 +49,14 @@
                     @endif          
                 @endauth
                 @guest
+                    @if (session('items'))
+                        @if (count(json_decode(session('items'), true)))
+                            <svg height="20" width="20">
+                                <circle cx="10" cy="10" r="8" fill="white" />
+                                <text x="50%" y="50%" dy=".3em" text-anchor="middle" fill="red">{{ count(json_decode(session('items'), true)) }}</text>
+                            </svg>                
+                        @endif
+                    @endif
                     <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
                     <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                 @else

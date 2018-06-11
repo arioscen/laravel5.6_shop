@@ -15,6 +15,21 @@ class CartController extends Controller
         if (Auth::user()) {
             $user_id = Auth::id();
             $user = User::find($user_id);
+
+            // check if user add item before login
+            $items = $request->session()->pull('items');
+            if ($items) {
+                $json = json_decode($items);
+                foreach($json as $key => $val) {
+                    $exists = DB::table('item_user')->where('item_id', $key)->where('user_id', $user_id)->count() > 0;
+                    if ($exists) {
+                        $user->items()->updateExistingPivot($key, ['number' => $val]);
+                    } else {
+                        $user->items()->syncWithoutDetaching([$key => ['number' => $val]]);
+                    }
+                }
+            }
+
             $items = $user->items()->get();
             $total = 0;
             foreach ($items as $item) {
