@@ -46,7 +46,18 @@ class LoginController extends Controller
 
         $this->clearLoginAttempts($request);
 
+        $next = $request->get('next');
+        if ($next) {
+            return redirect($next);
+        }
+
         return $this->authenticated($request, $this->guard()->user())
                 ?: redirect()->intended($this->redirectPath());
+    }
+    
+    public function showLoginForm(Request $request)
+    {
+        $next = $request->next;
+        return view('auth.login')->withNext($next);
     }    
 }

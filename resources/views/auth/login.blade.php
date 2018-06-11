@@ -60,6 +60,7 @@
                                 </a>
                             </div>
                         </div>
+                        <input name="next" value="{{ $next }}" hidden>
                     </form>
                 </div>
             </div>
