@@ -59,5 +59,5 @@ class LoginController extends Controller
     {
         $next = $request->next;
         return view('auth.login')->withNext($next);
-    }    
+    }
 }
